@@ -65,6 +65,8 @@ put_get_incomplete_ok_test(_) ->
     Context = woody_user_identity:put(Identity, Context0),
     Identity = woody_user_identity:get(Context).
 
+%% NOTE Ignore unmatched spec for erroneous call of woody_user_identity:put/2
+-dialyzer({nowarn_function, put_missing_required_error_test/1}).
 -spec put_missing_required_error_test(_) -> _.
 put_missing_required_error_test(_) ->
     Context0 = woody_context:new(),
@@ -83,7 +85,7 @@ get_missing_required_error_test(_) ->
     Context = woody_context:new(),
     ok =
         try
-            woody_user_identity:get(Context),
+            _ = woody_user_identity:get(Context),
             error
         catch
             throw:{missing_required, id} ->

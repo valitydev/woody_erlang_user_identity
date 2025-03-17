@@ -14,3 +14,7 @@ erl_crash.dump
 logs
 _build
 erlang.sublime-*
+
+# make stuff
+/.image.*
+Makefile.env
